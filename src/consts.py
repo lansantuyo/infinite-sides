@@ -32,7 +32,7 @@ ExampleType = List[ExampleEntry]
 DEFAULT_BASE_URL = "http://localhost:11434/v1"
 DEFAULT_EXAMPLES: ExampleType = [
     # Basic
-    {"from_str": "🌍 Earth +🌍 Earth", "result_str": " 🏔️ Mountain"},
+    {"from_str": "🌍 Earth +🌍 Earth", "result_str": "🏝️ Island"},
     {"from_str": "🌍 Earth + 💧 Water", "result_str": "🌱 Plant"},
     {"from_str": "🌍 Earth + 🌱 Plant", "result_str": "🌳 Tree"},
     {"from_str": "🌳 Tree + 👤 Person", "result_str": "🌲 Wood"},
@@ -106,7 +106,7 @@ DEFAULT_EXAMPLES: ExampleType = [
     {"from_str": "🏭 Factory + 🧑‍💼 Oda Kyosaburo", "result_str": "🏭 Ota Development Corporation"},
 
     # Events
-    {"from_str": " 🧑‍💼 Oda Kyosaburo + 🗻 Bataan", "result_str": "☠️ Bataan Death March"},
+    {"from_str": "🧑‍💼 Oda Kyosaburo + 🗻 Bataan", "result_str": "☠️ Bataan Death March"},
     {"from_str": "🪖 Masaharu Homma + 🗻 Bataan", "result_str": "☠️ Bataan Death March"},
     {"from_str": "🌴 Bataan + 🌴 San Fernando", "result_str": "☠️ Bataan Death March"},
     {"from_str": "🇺🇸 America + 💥 Explosion", "result_str": "💣 Pearl Harbor Bombing"},
@@ -136,13 +136,13 @@ DEFAULT_EXAMPLES: ExampleType = [
     {"from_str": "⛩️ Japanese Occupation + 👤 Filipino", "result_str": "🇵🇭 Philippine Resistance"},
 
     # {"from_str": "🇯🇵 Japan + ⚠️ War", "result_str": "🏞️ Bataan Death March"},
-    # {"from_str": "🇵🇭 Philippines + ⚠️ War", "result_str": "✊ Guerrilla Warfare"},
+    ## {"from_str": "🇵🇭 Philippines + ⚠️ War", "result_str": "✊ Guerrilla Warfare"},
     {"from_str": "🇵🇭 Philippine Resistance + 💣 Bataan Death March", "result_str": "✊ Guerrilla Warfare"},
 
 
 
     # Others
-    {"from_str": " 🇵🇭 Philippines + 👨‍💼Manuel L. Quezon", "result_str": "🛡️Civilian Emergency Administration"},
+    {"from_str": "🇵🇭 Philippines + 👨‍💼Manuel L. Quezon", "result_str": "🛡️Civilian Emergency Administration"},
     {"from_str": "🇺🇸 America + 💥 Explosion", "result_str": "💣 Pearl Harbor Bombing"},
     {"from_str": "🇺🇸 America + 💥 Explosion", "result_str": "💣 Pearl Harbor Bombing"},
 
@@ -174,10 +174,22 @@ DEFAULT_CHIPS = [
     "👤 Person",
     "🇯🇵 Japan",
     "🇵🇭 Philippines",
-    "🇺🇸 America",
+    "🇺🇸 United States",
+    "🇨🇳 China",
     "💴 Money",
     "🏙️ City",
     "🏛️ Institution",
+    "👤 Person",
+    "🏝️ Island",
+    "⬆️ Up",
+    "⬇️ Down",
+    "⬅️ Left",
+    "➡️ Right",
+    "📃 Policy",
+    "🌾 Rice",
+    "📈 Business", # can be crafted
+    "⚠️ War", #can be crafted
+    "🕊️ Peacetime",
 ]
 
 MODELS = [
