@@ -66,7 +66,6 @@ class BackendLLM:
         # TODO: don't check it every generation.
         self.reload_settings()
 
-        result = f'"{first} + {second}"'
         combined_input = f"{first} + {second}"
         reversed_input = f"{second} + {first}"
         print(combined_input)

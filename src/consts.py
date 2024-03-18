@@ -1,13 +1,18 @@
 from typing import List, TypedDict
 
-DEFAULT_SYSTEM_MSG = """You are playing as a historian tasked with combining elements from the Japanese Occupation in the Philippines to uncover deeper insights into this period. Use emojis to represent key figures, events, and concepts, and combine them to reveal new understandings or outcomes.
+DEFAULT_SYSTEM_MSG = """
+You are playing as a historian tasked with combining elements from the Japanese Occupation in 
+the Philippines to uncover deeper insights into this period. Use emojis to represent key figures, events, 
+and concepts, and combine them to reveal new understandings or outcomes.
 
 For example:
 "🇯🇵 Japanese Expansionism" + "🌾 Rice & Food Shortages" could result in "📉 Economic Hardship"
 or
 "🏰 Manila Declared Open City" + "✈️ Japanese Air Raid" could result in "🔥 Manila in Flames"
 
-Your task is to interpret combinations and provide results that reflect the historical interactions or consequences of these elements. The input format will be: "emoji Text + emoji Text", and your result should always be in the "emoji Text" format. Aim to use emojis that closely relate to the text for an immersive experience.
+Your task is to interpret combinations and provide results that reflect the historical interactions or consequences 
+of these elements. The input format will be: "emoji Text + emoji Text", and your result should always be in the 
+"emoji Text" format. Aim to use emojis that closely relate to the text for an immersive experience.
 
 Here are some elements from the document to get you started:
 
@@ -17,8 +22,9 @@ Here are some elements from the document to get you started:
 - "⚔️ Guerilla Warfare + 🌳 Philippine Jungles" = "🛡️ Resistance Efforts"
 - "🇺🇸 Douglas MacArthur + 🗣️ 'I Shall Return'" = "🏖️ Leyte Landing"
 
-Experiment with different combinations to explore the occupation's narrative. Your combinations and results will contribute to a deeper understanding of this historical period. Remember, the goal is to keep the emoji as closely related to the text as possible and maintain consistency throughout your responses.
-
+Experiment with different combinations to explore the occupation's narrative. Your combinations and results will 
+contribute to a deeper understanding of this historical period. Remember, the goal is to keep the emoji as closely 
+related to the text as possible and maintain consistency throughout your responses.
 """
 
 
@@ -32,14 +38,15 @@ ExampleType = List[ExampleEntry]
 DEFAULT_BASE_URL = "http://localhost:11434/v1"
 DEFAULT_EXAMPLES: ExampleType = [
     # Basic
-    {"from_str": "🌍 Earth +🌍 Earth", "result_str": "🏝️ Island"},
+    {"from_str": "🌍 Earth + 🌍 Earth", "result_str": "🏝️ Island"},
     {"from_str": "🌍 Earth + 💧 Water", "result_str": "🌱 Plant"},
     {"from_str": "🌍 Earth + 🌱 Plant", "result_str": "🌳 Tree"},
+    {"from_str": "🌳 Tree + 🌳 Tree", "result_str": "🌳 Forest"},
     {"from_str": "🌳 Tree + 👤 Person", "result_str": "🌲 Wood"},
-    {"from_str": "⬆️ Up + ⬇️ Down", "result_str": "🎯 Middle"},
-    {"from_str": "⬅️ Left + ➡️ Right", "result_str": "🎯 Middle"},
+    {"from_str": "⬆️ North + ⬇️ South", "result_str": "🎯 Middle"},
+    {"from_str": "⬅️ West + ➡️ East", "result_str": "🎯 Middle"},
     {"from_str": "🏛️ Institution + 👥 People", "result_str": "🏛️ Government"},
-    {"from_str": "🕊️ Peace + 🏛️ Government", "result_str": "📜 Treaty"},
+    {"from_str": "🕊️ Peacetime + 🏛️ Government", "result_str": "📜 Treaty"},
 
     {"from_str": "🔥 Fire + 🔫 Weapon", "result_str": "💣️ Bomb"},
     {"from_str": "🔥 Fire + 💣️ Bomb", "result_str": "💥 Explosion"},
@@ -76,10 +83,37 @@ DEFAULT_EXAMPLES: ExampleType = [
     {"from_str": "🛩️ Airplane + 🪖 Soldier", "result_str": "✈️ Air Power"},
     {"from_str": "🛩️ Airplane + 🪖 Troops", "result_str": "✈️ Air Power"},
     {"from_str": "🛩️ Airplane + 🪖 General", "result_str": "✈️ Air Power"},
+    {"from_str": "🌳 Forest + 🪖 Troops", "result_str": "🌳 Guerrilla Troops"},
 
     {"from_str": "🌱 Plant + 🏙️ Manila", "result_str": "🌿 Hemp"},
+    {"from_str": "💴 Money + 🇯🇵 Japan", "result_str": " 💵 Mickey Mouse Money"},
+    {"from_str": "🧑‍💼 Oda Kyosaburo + 🏙️ Manila", "result_str": "🏭 Ota Development Corporation"},
+    {"from_str": "🏭 Factory + 🇯🇵 Oda Kyosaburo", "result_str": "🏭 Ota Development Corporation"},
+    {"from_str": "🛡️ Defense + 🇵🇭 Philippines", "result_str": "📜 National Defense Plan"},
+    {"from_str": "🏛️ Government + 🇵🇭 Philippines", "result_str": "📜 National Defense Plan"},
+    {"from_str": "📃 Policy + 👨‍💼 Manuel L. Quezon", "result_str": "🛡️Civilian Emergency Administration"},
+    {"from_str": "🌍 Earth + 🏛️ Institution", "result_str": "🏛️ League of Nations"},
+    {"from_str": "👥 Japanese Troops +  🇯🇵 Japan",  "result_str": "🤝 Tripartite Pact"},
+    {"from_str": "⚠️ War + 🇯🇵 Japan",  "result_str": "🤝 Tripartite Pact"},
+    {"from_str": "👥 Filipino Troops + 🗻 Bataan", "result_str": "🌈 Rainbow Plan 5"},
+    {"from_str": "⚠️ War + 🌈 Rainbow Plan 5", "result_str": "⚠️ War Plan Orange 3"},
+    {"from_str": "🎖️ Douglas MacArthur" + "🌈 Rainbow Plan 5", "result_str": "⚠️ War Plan Orange 3"},
+    {"from_str": "🇵🇭 Philippines + 📈 Business", "result_str": "🤪 Anti-Dummy Law"},
+    {"from_str": "💴 Money + 📈 Business", "result_str": "🤪 Anti-Dummy Law"},
+    {"from_str": "📃 Policy + 📈 Business", "result_str": "🤪 Anti-Dummy Law"},
+    {"from_str": "🌾 Rice + 📈 Business", "result_str": "🍚 Bigasang Bayan"},
+    {"from_str": "🌾 Rice + 💴 Money", "result_str": "🍚 Bigasang Bayan"},
+    {"from_str": "🌾 Rice + 🧑‍💼 Merchant", "result_str": "🍚 Bigasang Bayan"},
+    {"from_str": "🌾 Rice + 👤 Filipino", "result_str": "🍚 Bigasang Bayan"},
+    {"from_str": "🇺🇸 America + 📜 Treaty", "result_str": "✍️ Hull Note"},
+    {"from_str": "🇯🇵 Japan + 📜 Treaty", "result_str": "✍️ Hull Note"},
+    {"from_str": "🌾 Rice + ⛩️ Japanese Occupation", "result_str": "🌾 Rice Crisis"},
+    {"from_str": "🌾 Rice + 💴 Money", "result_str": "🌾 Rice Crisis"},
+
+
 
     # People
+    {"from_str": "👤 Filipino + 🏛️ Government", "result_str": "👨‍💼 Manuel L. Quezon"},
     {"from_str": "👤 Filipino + 🇵🇭 Philippines", "result_str": "👨‍💼 Manuel L. Quezon"},
     {"from_str": "🧑‍💼 Merchant + 👤 Japanese", "result_str": "🧑‍💼 Oda Kyosaburo"},
     {"from_str": "🧑‍💼 Merchant + 🇯🇵 Japan", "result_str": "🧑‍💼 Oda Kyosaburo"},
@@ -89,18 +123,17 @@ DEFAULT_EXAMPLES: ExampleType = [
 
     # Places
     {"from_str": "🏝️ Island + 🇵🇭 Philippines", "result_str": "🏝️ Philippine Islands"},
-    {"from_str": "🏝️ Philippine Islands + ⬆️ Up", "result_str": "🏝️ Luzon"},
+    {"from_str": "🏝️ Philippine Islands + ⬆️ North", "result_str": "🏝️ Luzon"},
     {"from_str": "🏝️ Philippine Islands + 🎯 Middle", "result_str": "🏝️ Visayas"},
-    {"from_str": "🏝️ Philippine Islands + ⬇️ Down", "result_str": "🏝️ Mindanao"},
+    {"from_str": "🏝️ Philippine Islands + ⬇️ South", "result_str": "🏝️ Mindanao"},
     {"from_str": "🏙️ City + 🏝️ Luzon", "result_str": "🏙️ Manila"},
     {"from_str": "🏙️ City + 🏝️ Mindanao", "result_str": "🏙️ Davao"},
     {"from_str": "🏝️ Island + 🏝️ Visayas", "result_str": "🏝️ Leyte"},
     {"from_str": "🇨🇳 China + 👥 Japanese Troops", "result_str": "🎌 Manchukuo"},
-    {"from_str": "⬅️ Left + 🏝️ Luzon", "result_str": "🗻 Bataan"},
+    {"from_str": "⬅️ West + 🏝️ Luzon", "result_str": "🗻 Bataan"},
     {"from_str": "🎯 Middle + 🏝️ Luzon", "result_str": "🌾 San Fernando"},
-    {"from_str": "⬆️ Up + 🌾 San Fernando", "result_str": "🌾 Tarlac"},
+    {"from_str": "⬆️ North + 🌾 San Fernando", "result_str": "🌾 Tarlac"},
     {"from_str": "🌾 San Fernando + 👥 American Troops ", "result_str": "⛺️ Camp O’Donnell"},
-
 
     # Institutions
     {"from_str": "🏭 Factory + 🧑‍💼 Oda Kyosaburo", "result_str": "🏭 Ota Development Corporation"},
@@ -119,11 +152,11 @@ DEFAULT_EXAMPLES: ExampleType = [
     {"from_str": "🕊️ Peacetime + 👨‍💼 Manuel L. Quezon", "result_str": "🏛️ Start of the Commonwealth"},
     {"from_str": "🏛️ Government + 👨‍💼 Manuel L. Quezon", "result_str": "🏛️ Start of the Commonwealth"},
     {"from_str": "🏛️ Government + 📜 Treaty", "result_str": "🏛️ Start of the Commonwealth"},
-    {"from_str": "🏛️ Government" +  "📃 Policy", "result_str": "🏛️ Start of the Commonwealth"},
+    {"from_str": "🏛️ Government" + "📃 Policy", "result_str": "🏛️ Start of the Commonwealth"},
     {"from_str": "👤 Manuel Quezon + 🇺🇸 United States", "result_str": "🇵🇭 Start of the Commonwealth"},
 
     {"from_str": "🇺🇸 America + 💥 Explosion", "result_str": "💣 Pearl Harbor Bombing"},
-    {"from_str": "🇯🇵Japan + 💥 Explosion", "result_str": "💣 Pearl Harbor Bombing"},
+    {"from_str": "🇯🇵 Japan + 💥 Explosion", "result_str": "💣 Pearl Harbor Bombing"},
     {"from_str": "✈️ Air Power + 💥 Explosion", "result_str": "💣 Pearl Harbor Bombing"},
 
     {"from_str": "🕊️ Peacetime + 💣 Pearl Harbor Bombing", "result_str": "⛩️ Japanese Occupation"},
@@ -131,39 +164,33 @@ DEFAULT_EXAMPLES: ExampleType = [
     {"from_str": "🕊️ Peacetime + 💣 Pearl Harbor Bombing", "result_str": "⛩️ Japanese Occupation"},
     {"from_str": "🇯🇵 Japan + 🇵🇭 Philippines", "result_str": "🇵🇭 Japanese Occupation"},
 
-
     {"from_str": "⛩️ Japanese Occupation +  🇵🇭 Philippines", "result_str": "🇵🇭 Philippine Resistance"},
     {"from_str": "⛩️ Japanese Occupation + 👤 Filipino", "result_str": "🇵🇭 Philippine Resistance"},
+    {"from_str": "⛩️ Japanese Occupation + 👥 Filipino Troops", "result_str": "🇵🇭 Philippine Resistance"},
 
-    # {"from_str": "🇯🇵 Japan + ⚠️ War", "result_str": "🏞️ Bataan Death March"},
-    ## {"from_str": "🇵🇭 Philippines + ⚠️ War", "result_str": "✊ Guerrilla Warfare"},
     {"from_str": "🇵🇭 Philippine Resistance + 💣 Bataan Death March", "result_str": "✊ Guerrilla Warfare"},
+    {"from_str": "🌳 Guerrilla Troops + 👥 Japanese Troops", "result_str": "✊ Guerrilla Warfare"},
 
+    {"from_str": "🛶 Boat + 🏝️ Leyte", "result_str": "🏝️ Leyte Gulf Landing"},
+
+    {"from_str": "⚓ Naval Power + 🏝️ Leyte", "result_str": "⚔️ Battle of Leyte Gulf"},
+    {"from_str": "⚠️ War + 🏝️ Leyte Gulf Landing", "result_str": "⚔️ Battle of Leyte Gulf"},
+    {"from_str": "💥 Explosion + 🏝️ Leyte Gulf Landing", "result_str": "⚔️ Battle of Leyte Gulf"},
+    {"from_str": "👥 Japanese Troops + 🏝️ Leyte Gulf Landing", "result_str": "⚔️ Battle of Leyte Gulf"},
+    {"from_str": "👥 American Troops + 🏝️ Leyte Gulf Landing", "result_str": "⚔️ Battle of Leyte Gulf"},
+
+    {"from_str": "🇺🇸 United States + 🏙️ Manila", "result_str": "🎉 Liberation of Manila"},
+    {"from_str": "📃 Policy + 🏙️ Manila", "result_str": "🎉 Liberation of Manila"},
+    {"from_str": "👥 American Troops + 🏙️ Manila", "result_str": "🎉 Liberation of Manila"},
+
+    {"from_str": "🇵🇭 Philippines + 🕊️ Peacetime", "result_str": "🇵🇭 Proclamation of Philippine Liberation"},
+    {"from_str": "🏛️ Start of the Commonwealth + 🏛️ Government", "result_str": "🇵🇭 Proclamation of Philippine Liberation"},
 
 
     # Others
     {"from_str": "🇵🇭 Philippines + 👨‍💼Manuel L. Quezon", "result_str": "🛡️Civilian Emergency Administration"},
     {"from_str": "🇺🇸 America + 💥 Explosion", "result_str": "💣 Pearl Harbor Bombing"},
     {"from_str": "🇺🇸 America + 💥 Explosion", "result_str": "💣 Pearl Harbor Bombing"},
-
-    {"from_str": "🇯🇵 Japan + 📜 Meiji Restoration", "result_str": "🏭 Industrialization"},
-    {"from_str": "🇵🇭 Philippines + 🛠️ National Defense Plan", "result_str": "🛡️ Civilian Emergency Administration"},
-    {"from_str": "🕊️ Peace + 🚨 Japanese Expansionist Policy", "result_str": "🔥 Conflict"},
-    {"from_str": "🚢 USS Missouri + 📄 Surrender Document", "result_str": "✌️ Liberation"},
-    {"from_str": "🌉 Manila + 🏭 Industrial Growth", "result_str": "💼 Economic Nationalism"},
-    {"from_str": "👥 Guerrilla Units + 🌳 Mountainous Terrain", "result_str": "💥 Resistance Efforts"},
-    {"from_str": "💰 Mickey Mouse Money + 🔄 Barter System", "result_str": "📉 Economic Decline"},
-    {"from_str": "📚 Education + 🇯🇵 Japanese Language", "result_str": "🏫 Cultural Assimilation"},
-    {"from_str": "🎌 Greater East Asia Co-Prosperity Sphere + 🌏 Southeast Asia",
-     "result_str": "🤝 Political Manipulation"},
-    {"from_str": "🏯 Japanese Castle + 🔥 Fire", "result_str": "💣 Bomb"},
-    {"from_str": "🇵🇭 Philippine Flag + ⚔️ Sword", "result_str": "🔒 Lock"},
-    {"from_str": "📜 Scroll + 🕊️ Peace", "result_str": "🇯🇵 Japanese Flag"},
-    {"from_str": "💧 Water + 🌾 Rice", "result_str": "🍚 Cooked Rice"},
-    {"from_str": "🔥 Fire + 🌱 Manila Hemp", "result_str": "📦 Supplies"},
-    {"from_str": "🚢 Ship + 🇯🇵 Japanese Flag", "result_str": "⚓ Occupation"},
-    {"from_str": "👥 People + 💣 Bomb", "result_str": "🚑 Aid"},
-    {"from_str": "🕊️ Peace + ⚔️ Sword", "result_str": "📝 Treaty"},
 ]
 
 DEFAULT_CHIPS = [
@@ -174,21 +201,22 @@ DEFAULT_CHIPS = [
     "👤 Person",
     "🇯🇵 Japan",
     "🇵🇭 Philippines",
-    "🇺🇸 United States",
+    "🇺🇸 America",
     "🇨🇳 China",
     "💴 Money",
     "🏙️ City",
+    "🔫 Weapon",
     "🏛️ Institution",
-    "👤 Person",
     "🏝️ Island",
-    "⬆️ Up",
-    "⬇️ Down",
-    "⬅️ Left",
-    "➡️ Right",
+    "⬆️ North",
+    "⬇️ South",
+    "⬅️ West",
+    "➡️ East",
     "📃 Policy",
     "🌾 Rice",
-    "📈 Business", # can be crafted
-    "⚠️ War", #can be crafted
+    "📈 Business",
+    "⚠️ War",
+    "🛡️ Defense",
     "🕊️ Peacetime",
 ]
 
